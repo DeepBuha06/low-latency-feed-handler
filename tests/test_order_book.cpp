@@ -1,7 +1,9 @@
 #include <iostream>
-#include <cassert>
+#include <cstdlib>
 #include "../include/order_book.h"
 #include "../include/protocol.h"
+
+#define ASSERT_TRUE(cond) do { if (!(cond)) { std::cerr << "Assert Failed: " << #cond << " at line " << __LINE__ << "\n"; std::exit(1); } } while(0)
 
 using namespace hft::feed;
 
@@ -15,8 +17,8 @@ void test_add_order() {
     msg.action = OrderAction::ADD;
 
     book.apply(msg);
-    assert(book.get_volume_at_price(Side::BID, 1000) == 50);
-    assert(book.get_volume_at_price(Side::ASK, 1000) == 0);
+    ASSERT_TRUE(book.get_volume_at_price(Side::BID, 1000) == 50);
+    ASSERT_TRUE(book.get_volume_at_price(Side::ASK, 1000) == 0);
     std::cout << "[PASS] test_add_order\n";
 }
 
@@ -33,7 +35,7 @@ void test_modify_order() {
     msg.action = OrderAction::MODIFY;
     book.apply(msg);
 
-    assert(book.get_volume_at_price(Side::BID, 1000) == 20);
+    ASSERT_TRUE(book.get_volume_at_price(Side::BID, 1000) == 20);
     std::cout << "[PASS] test_modify_order\n";
 }
 
@@ -50,7 +52,7 @@ void test_cancel_order() {
     msg.action = OrderAction::CANCEL;
     book.apply(msg);
 
-    assert(book.get_volume_at_price(Side::BID, 1000) == 0);
+    ASSERT_TRUE(book.get_volume_at_price(Side::BID, 1000) == 0);
     std::cout << "[PASS] test_cancel_order\n";
 }
 
@@ -67,7 +69,7 @@ void test_cancel_underflow() {
     msg.action = OrderAction::CANCEL;
     book.apply(msg);
 
-    assert(book.get_volume_at_price(Side::BID, 1000) == 0); // Should clamp to 0
+    ASSERT_TRUE(book.get_volume_at_price(Side::BID, 1000) == 0); // Should clamp to 0
     std::cout << "[PASS] test_cancel_underflow\n";
 }
 

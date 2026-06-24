@@ -6,7 +6,11 @@
 *.exe
 *.out
 feed_handler
+test_order_book
+test_spsc_queue
+run_benchmarks
 build/
+build_test/
 
 # IDEs
 .vscode/

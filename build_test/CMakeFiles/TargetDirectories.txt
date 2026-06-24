@@ -1,6 +1,0 @@
-/mnt/c/low-latency-feed-handler/build_test/CMakeFiles/feed_handler.dir
-/mnt/c/low-latency-feed-handler/build_test/CMakeFiles/test_order_book.dir
-/mnt/c/low-latency-feed-handler/build_test/CMakeFiles/test_spsc_queue.dir
-/mnt/c/low-latency-feed-handler/build_test/CMakeFiles/run_benchmarks.dir
-/mnt/c/low-latency-feed-handler/build_test/CMakeFiles/edit_cache.dir
-/mnt/c/low-latency-feed-handler/build_test/CMakeFiles/rebuild_cache.dir
