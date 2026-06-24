@@ -17,7 +17,16 @@ jobs:
         submodules: recursive
 
     - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Release
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Release -DUSE_SANITIZERS=ON
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build -j4
+
+    - name: Run Unit Tests (with ASAN/UBSAN)
+      run: |
+        ${{github.workspace}}/build/test_order_book
+        ${{github.workspace}}/build/test_spsc_queue
+
+    - name: Run Benchmarks (Report Only)
+      run: |
+        ${{github.workspace}}/build/run_benchmarks

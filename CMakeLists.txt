@@ -24,3 +24,17 @@ add_executable(feed_handler
 
 find_package(Threads REQUIRED)
 target_link_libraries(feed_handler Threads::Threads)
+
+option(USE_SANITIZERS "Enable ASAN and UBSAN for testing" OFF)
+if(USE_SANITIZERS)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address,undefined -fno-omit-frame-pointer -g")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=address,undefined")
+endif()
+
+# Tests
+add_executable(test_order_book tests/test_order_book.cpp src/order_book.cpp)
+add_executable(test_spsc_queue tests/test_spsc_queue.cpp)
+
+# Benchmarks
+add_executable(run_benchmarks scripts/benchmarks.cpp src/order_book.cpp)
+target_link_libraries(run_benchmarks Threads::Threads)

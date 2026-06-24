@@ -1,0 +1,1 @@
+/usr/bin/c++  -O3 -march=native -flto -Wall -Wextra -Werror -Wno-interference-size -fsanitize=address,undefined -fno-omit-frame-pointer -g  -fsanitize=address,undefined CMakeFiles/test_order_book.dir/tests/test_order_book.cpp.o CMakeFiles/test_order_book.dir/src/order_book.cpp.o -o test_order_book 
