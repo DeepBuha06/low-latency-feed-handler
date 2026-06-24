@@ -1,0 +1,24 @@
+# Compiled objects
+*.o
+*.obj
+
+# Executables
+*.exe
+*.out
+feed_handler
+build/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# Python
+__pycache__/
+*.pyc
+
+# Telemetry
+*.csv
+!assets/
+
+# Agent Artifacts
