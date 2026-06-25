@@ -20,7 +20,7 @@ flowchart LR
 
 ## Performance Profile
 
-Benchmarks executed on standard hardware using `CLOCK_MONOTONIC` hardware timestamps.
+Benchmarks executed on standard hardware using `CLOCK_MONOTONIC` software timestamps. Note: A production implementation would rely on NIC hardware timestamping (e.g., `SO_TIMESTAMPING`).
 
 * **Order Book Application Latency:** The physical execution time to update the Bid/Ask array.
     * Compiled to 10 x86-64 machine instructions under GCC `-O3`.
@@ -37,7 +37,7 @@ Benchmarks executed on standard hardware using `CLOCK_MONOTONIC` hardware timest
 
 ![Latency Histogram](assets/latency_histogram.png)
 
-*Note: The observed tail latency is likely dominated by OS scheduling and virtualization effects (WSL2 environment), rather than the order-book update path itself.*
+*Note: The observed tail latency is heavily dominated by OS scheduling and virtualization effects (WSL2 environment). These metrics represent a worst-case baseline. True p99/p99.9 evaluation requires deployment on a bare-metal Linux server with tuned kernel parameters (isolcpus, NO_HZ_FULL) and a kernel-bypass networking stack (e.g., Solarflare OpenOnload or DPDK).*
 
 ## Core Technical Concepts Demonstrated
 
@@ -76,3 +76,4 @@ make -j
 ```bash
 python3 scripts/market_simulator.py
 ```
+*Note: The Python simulator is designed for functional correctness and pipeline validation. Real-world throughput benchmarking would require a dedicated C++ pcap replay tool capable of saturating the network link.*
