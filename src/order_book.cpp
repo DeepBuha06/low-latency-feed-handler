@@ -4,6 +4,8 @@ namespace hft::feed {
 
 void OrderBook::apply(const OrderMessage& msg) {
     // Bounds check to prevent buffer overflow (crucial in C++)
+    // as the price_ticks is a uint32_t if the tick underflows, we have a very massive number 
+    // so we can just skip underflow comparison
     if (msg.price_ticks >= LOB_ARRAY_SIZE) {
         return; // Drop invalid price gracefully
     }
